@@ -13,13 +13,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 // import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { AlertCircle, Upload } from 'lucide-react';
-import { ChangeEvent, useState } from 'react';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { auth, storage } from '@/configs/firebaseConfig';
-import { v4 } from 'uuid';
 import axios from 'axios';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { AlertCircle, Upload } from 'lucide-react';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { v4 } from 'uuid';
 
 const formSchema = z.object({
   firstname: z.string().min(2).max(30),
@@ -67,7 +68,6 @@ const Register = () => {
       const downloadURL = await getDownloadURL(uploadedFile.ref);
 
       const newUserFirebase = await createUserWithEmailAndPassword(auth, values.email, values.password);
-
       const newUserData = {
         id: newUserFirebase.user.uid,
         firstName: values.firstname,

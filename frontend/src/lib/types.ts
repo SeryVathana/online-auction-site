@@ -65,3 +65,25 @@ export type AuthContextType = {
   user: UserDBType | null;
   logout: () => void;
 };
+
+export type BiddingHistoryType = {
+  id: string;
+  userId: string;
+  bidAmount: number;
+  bidDate: Date;
+};
+
+export type PostType = {
+  _id: string;
+  title: string;
+  description: string;
+  initialPrice: number;
+  bidIncrement: number;
+  curPrice: number;
+  endDate: Date;
+  biddingHistory: BiddingHistoryType[];
+  displayImgURL: string;
+  othersImgURL: string[];
+  sellerId: string;
+  status: string;
+};

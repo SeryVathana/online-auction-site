@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema(
     pfImgURL: { type: String, required: true },
     birthDate: { type: String, required: true },
     role: { type: String, required: true },
+    posts: { type: Array },
+    savedPosts: { type: Array },
+    biddingHistory: { type: Array },
+    succeedBid: { type: Array },
   },
   { timestamps: true, _id: false }
 );

@@ -1,19 +1,23 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
-// const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-// const getItem = async () => {
-//   const res = await fetch(`${API_URL}/api/posts`);
-
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-//   return res.json();
-// };
+import { PostType } from './lib/types';
+import { useEffect, useState } from 'react';
+import PostCard from './components/PostCard';
 
 const Homepage = () => {
-  // const data = await getItem();
+  const [posts, setPosts] = useState<PostType[]>([]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const res = await fetch('http://localhost:3000/post');
+      console.log('h');
+
+      const data = await res.json();
+      setPosts(data);
+    };
+
+    getPosts();
+  }, []);
 
   return (
     <>
@@ -41,6 +45,11 @@ const Homepage = () => {
           <Button asChild variant={'ghost'}>
             <Link to={'/browse'}>See more &rarr;</Link>
           </Button>
+        </div>
+        <div>
+          {posts.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
         </div>
         {/* <CardsContainer inputData={data} itemNumber={4} className='mt-5' /> */}
       </section>

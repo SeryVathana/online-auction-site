@@ -1,7 +1,3 @@
-// 'use client';
-
-// import React, { useEffect } from 'react';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,27 +9,15 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { AlignJustify } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button, buttonVariants } from './ui/button';
+import { buttonVariants } from './ui/button';
 import { Separator } from './ui/separator';
 
+import { auth } from '@/configs/firebaseConfig';
 import { useAuth } from '@/contexts/AuthContext';
 import { AuthContextType } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { Link, Navigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/configs/firebaseConfig';
-
-// import axios from 'axios';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { RootState } from '@/redux/store';
-// import Link from 'next/link';
-// import { redirect, useRouter } from 'next/navigation';
-// import { logIn, logOut } from '@/redux/features/auth-slice';
-// import { signOut } from 'firebase/auth';
-// import { auth } from '@/configs/firebase-config';
-// import { useAuth } from '@/customHooks/useAuth';
-
-// const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { Link, useNavigate } from 'react-router-dom';
 
 const NAVLINK = [
   {
@@ -56,10 +40,12 @@ const NAVLINK = [
 
 const NavActions = () => {
   const { user } = useAuth() as AuthContextType;
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await signOut(auth);
-    return <Navigate to={'/sign-in'} replace={true} />;
+    navigate('/sign-in');
+    return;
   };
 
   return (
@@ -87,7 +73,7 @@ const NavActions = () => {
               <DropdownMenuTrigger className={cn('flex items-center gap-2', buttonVariants({ variant: 'ghost' }))}>
                 <Avatar className='w-8 h-8 border'>
                   <AvatarImage src={user.pfImgURL} className=' object-cover' sizes='100px' />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>{user.firstName[0] + user.lastName[0]}</AvatarFallback>
                 </Avatar>
                 {user.firstName}
               </DropdownMenuTrigger>

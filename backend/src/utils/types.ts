@@ -13,3 +13,28 @@ export type UserPostBody = {
   birthDate: string;
   role: string;
 };
+
+export type PostIdParams = {
+  id: string;
+};
+
+export type BiddingHistoryType = {
+  id: string;
+  userId: string;
+  bidAmount: number;
+  bidDate: Date;
+};
+
+export type NewPostBody = {
+  title: string;
+  description: string;
+  initialPrice: number;
+  bidIncrement: number;
+  curPrice: number;
+  endDate: Date;
+  biddingHistory: BiddingHistoryType[];
+  displayImgURL: string;
+  othersImgURL: string[];
+  sellerId: string;
+  status: string;
+};
