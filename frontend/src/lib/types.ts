@@ -33,16 +33,15 @@ export type LocationType = {
 
 export type ItemDataType = {
   _id: string;
-  itemName: string;
-  itemDescription: string;
+  title: string;
+  description: string;
   initialPrice: number;
   bidIncrement: number;
-  location: LocationType;
   category: string;
-  pending: boolean;
-  displayImg: ImgType;
-  othersImg: ImgType[];
-  seller: SellerType;
+  status: string;
+  displayImgURL: ImgType;
+  othersImgURL: string[];
+  sellerId: string;
   endDate: Date;
   createdAt: Date;
   biddingHistory: BidHistoryType[];
@@ -67,8 +66,8 @@ export type AuthContextType = {
 };
 
 export type BiddingHistoryType = {
-  id: string;
   userId: string;
+  userName: string;
   bidAmount: number;
   bidDate: Date;
 };
@@ -86,4 +85,6 @@ export type PostType = {
   othersImgURL: string[];
   sellerId: string;
   status: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

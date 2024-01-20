@@ -2,12 +2,12 @@ import { auth } from '@/configs/firebaseConfig';
 import { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const UnAuthLayout = ({ children }: { children: ReactNode }) => {
+const AuthLayout = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const curUser = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
+      if (!authUser) {
         navigate('/');
       }
     });
@@ -17,4 +17,4 @@ const UnAuthLayout = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
 };
 
-export default UnAuthLayout;
+export default AuthLayout;

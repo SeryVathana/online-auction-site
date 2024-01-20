@@ -17,6 +17,9 @@ export type UserPostBody = {
 export type PostIdParams = {
   id: string;
 };
+export type UpdateIdParams = {
+  id: string;
+};
 
 export type BiddingHistoryType = {
   id: string;
@@ -37,4 +40,18 @@ export type NewPostBody = {
   othersImgURL: string[];
   sellerId: string;
   status: string;
+};
+
+export type UpdatePostBody = {
+  title?: string;
+  description?: string;
+  initialPrice?: number;
+  bidIncrement?: number;
+  curPrice?: number;
+  endDate?: Date;
+  biddingHistory?: BiddingHistoryType[];
+  displayImgURL?: string;
+  othersImgURL?: string[];
+  sellerId?: string;
+  status?: string;
 };
